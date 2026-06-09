@@ -34,8 +34,15 @@ const run = async () => {
                 _id: new ObjectId(id)
             }
             const user = await userCollection.findOne(query)
-            console.log(id)
+            // console.log(id)
             res.send(user)
+        })
+
+        app.post('/users', async(req,res) =>{
+             const newUser = req.body;
+             console.log('user to be inserted', newUser)
+             const result = await userCollection.insertOne(newUser);
+             res.send(result)
         })
 
         app.delete('/users/:id', async (req, res) => {
